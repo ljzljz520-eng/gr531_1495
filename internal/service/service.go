@@ -1,7 +1,6 @@
 package service
 
 import (
-	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -103,7 +102,7 @@ func (s *Service) Preview(fixtureName string) (domain.Preview, error) {
 	}
 	plans, err := s.converter.ConvertCatalog(catalog)
 	if err != nil {
-		return domain.Preview{}, errors.New("schema conversion failed")
+		return domain.Preview{}, fmt.Errorf("schema conversion failed: %w", err)
 	}
 	return domain.Preview{Fixture: fixtureName, Plans: plans}, nil
 }
